@@ -8,6 +8,7 @@ import AllCars from '../src/components/cars/AllCars.vue'
 import CarDetails from '../src/components/cars/CarDetails.vue'
 import NotFound from '../src/components/common/NotFound.vue'
 import EditCar from '../src/components/cars/EditCar.vue'
+import Logout from '../src/components/authentication/Logout.vue'
 
 
 
@@ -33,6 +34,11 @@ export default new Router({
       component: Login
     },
     {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
+    },
+    {
       path: '/cars/create',
       name: 'createCar',
       component: CreateCar
@@ -48,14 +54,14 @@ export default new Router({
       component: CarDetails
     },
     {
-      path: '*',
-      name: 'NotFound',
-      component: NotFound
-    },
-    {
       path: '/editCar/:id',
       name: 'editCar',
       component: EditCar
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
   ]
 })

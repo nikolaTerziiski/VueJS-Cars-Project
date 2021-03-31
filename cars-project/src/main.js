@@ -6,6 +6,7 @@ import Vuelidate from 'vuelidate'
 import axiosPlugin from '@/plugins/axiosPlugin' 
 import { authService } from './services/authService'
 import {carService} from './services/carServices'
+import vuetify from '@/vuetify'
 Vue.use(axiosPlugin);
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -21,5 +22,6 @@ Vue.mixin(carService);
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

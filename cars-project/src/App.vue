@@ -1,8 +1,12 @@
 <template>
   <div id="app">
+    <v-app>
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <page-header></page-header>
-    <router-view/>
+    <v-main>  <router-view/></v-main>
     <page-footer></page-footer>
+    </v-app>
   </div>
 </template>
 
@@ -77,4 +81,8 @@ html {
     from {opacity: 0.2;}
     to {opacity: 1;}
   }
+
+v-application a {
+  color: none;
+}
 </style>

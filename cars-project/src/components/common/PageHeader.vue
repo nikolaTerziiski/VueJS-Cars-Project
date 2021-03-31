@@ -32,32 +32,28 @@
   </div>
 </nav> -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">Cars</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul class="navbar-nav mr-auto">
-         <li class="nav-item active">
-        <a class="nav-link"><router-link to="/">Home</router-link><span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"><router-link to="/register">Register</router-link></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"><router-link to="/login">Login</router-link></a>
-      </li>
-      </ul>
-      <ul>
-          <li class="nav-item">
-            <a class="nav-link"><router-link to="/login">Login</router-link></a>
-          </li> 
-      </ul>
-    </div>
+  <div>
+    <v-app-bar
+      color="gray"
+      dense
+      dark
+    >
+      <v-toolbar-title>
+        <span>
+        <a href="/">Car place</a>
+        </span>
+        </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <span>
+          <a href="/cars/create">Create</a>
+          <a href="#">Welcome</a>
+          <a href="#">Logout</a>
+          <!-- <a href="/register">Register</a>
+              <a href="/login">Login</a> -->
+        </span>
+    </v-app-bar>
   </div>
-</nav>
 </template>
 
 <script>
@@ -85,55 +81,41 @@ header,
 .view {
   height: 100%;
 }
+header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 0 50px;
+}
 
-@media (max-width: 740px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 1000px;
+header a {
+  float: left;
+  color: purple;
+  text-align: center;
+  padding: 18px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+header .header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  header a {
+    float: none;
+    display: block;
+    text-align: left;
   }
-}
-@media (min-width: 800px) and (max-width: 850px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 600px;
+
+  header-right {
+    float: none;
   }
-}
-
-.btn .fa {
-  margin-left: 3px;
-}
-
-.top-nav-collapse {
-  background-color: #424f95 !important;
-}
-
-.navbar:not(.top-nav-collapse) {
-  background: transparent !important;
-}
-
-@media (max-width: 991px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #424f95 !important;
-  }
-}
-
-.btn-white {
-  color: black !important;
-}
-
-h6 {
-  line-height: 1.7;
-}
-
-.rgba-gradient {
-  background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
-  background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
-  background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.7)), to(rgba(29, 210, 177, 0.7)));
-  background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
-  background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
 }
 </style>

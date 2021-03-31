@@ -16,6 +16,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuelidate": "^0.7.4",
+    "vuetify": "^2.4.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -23,8 +24,11 @@
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
     "babel-eslint": "^10.0.1",
+    "deepmerge": "^4.2.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
