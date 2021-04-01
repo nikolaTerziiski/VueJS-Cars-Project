@@ -5,7 +5,7 @@
             <div class="mask rgba-gradient align-items-center">
               <div class="container">
                 <div class="row">
-                  <div v-if="!isAuthenticated" class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                  <div v-if="isLoggedIn" class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
                     <h1 class="h1-responsive font-weight-bold mt-sm-5">Welcome to my app! </h1>
                     <hr class="hr-light">
                     <h6 class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt
@@ -49,10 +49,13 @@
 
 <script>
 // @ is an alias to /src
-
+import {store} from '../store.js'
 export default {
   name: 'home',
-  components: {
+  computed: {
+    isLoggedIn() {
+      return store.getters['userAuth/isItLoggedIn'];
+    },
   }
 }
 </script>

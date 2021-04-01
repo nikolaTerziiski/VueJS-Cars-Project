@@ -13,24 +13,30 @@
 
 <script>
 /* eslint-disable */
-import { authenticate } from '../../services/authService';
 import {required, minLength, maxLength} from 'vuelidate/lib/validators'
+import { mapActions } from 'vuex';
 
 export default {
     data() {
       return {
-          username: 'Peshko',
-          password: '123123',
+          username: '',
+          password: '',
       }
     },
-    mixins: [authenticate],
     methods: {
       onLoginClick() {
-          this.onLoginUser(this.username, this.password)
-          .then(user => {
-                this.$root.$emit('logged-in', user.authtoken);
-                this.$router.push('/');
-          })
+        const {username, password} = this;
+        const { dispatch } = this.$store
+        this.$v.$touch();
+        if(this.$v.$invalid){
+          console.log('invalid credentials');
+          return;
+        }
+
+        this.submitted = true;
+        dispatch('userAuth/login', {
+          username, password
+        })
       }
     },
     validations: {

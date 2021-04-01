@@ -2,7 +2,7 @@ import { getAllCars } from '../cars/carsMutations.js'
 import config from '@/config/config'
 
 
-const getAuthToken = () => localStorage.getItem('authtoken'); 
+const getAuthToken = () => localStorage.getItem('authToken'); 
 
 export default {
     getAll(context) {

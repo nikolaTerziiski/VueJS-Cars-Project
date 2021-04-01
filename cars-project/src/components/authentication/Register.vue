@@ -18,24 +18,37 @@
 
 <script>
 /* eslint-disable */
-import { authenticate } from '../../services/authService';
 
 import {required, minLength, maxLength, email} from 'vuelidate/lib/validators'
+
+import {store} from '../../store.js'
 export default {
     data() {
         return {
             username: '',
             password: '',
-            email: ''
+            email: '',
+            submitted: false
         }
     },
-    mixins: [authenticate],
   methods: { 
       onRegisterClick() {
-        this.onRegisterUser(this.username, this.password)
-              .then(res => {
-                this.$root.$emit('logged-in', res.authtoken);
-                this.$router.push('/')})
+        // this.onRegisterUser(this.username, this.password)
+        //       .then(res => {
+        //         this.$router.push('/')})
+
+        const {username, password, email} = this;
+        const { dispatch } = this.$store
+        this.$v.$touch();
+        if(this.$v.$invalid){
+          console.log('invalid credentials');
+          return;
+        }
+
+        this.submitted = true;
+        dispatch('userAuth/register', {
+          username, password, email
+        })
       }
   },
   validations: {

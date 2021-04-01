@@ -1,33 +1,28 @@
 import config from '@/config/config'
 const authString= btoa(`${config.appKey}:${config.appSecret}`)
-
-const loginUser = user => {
-    localStorage.setItem("username", user.username),
-    localStorage.setItem("authtoken", user.authToken)
-    return user;
-}
-const clearToken = () => {
-    localStorage.removeItem("username"),
-    localStorage.removeItem("authtoken")
-}
 /* eslint-disable */
+let authToken = null
+const clearToken = () => {
+    localStorage.removeItem("user"),
+    localStorage.removeItem("authToken")
+}
+
 export const authService = {
     data() {
         return {
-                authToken: localStorage.getItem('authtoken')
         }
     },
     computed: {
         isAuthenticated(){
-            return this.authToken !== null;
+            console.log(authToken);
+            console.log(authToken);
+            return authToken !== null;
         }
     },
     created(){
         this.$root.$on('logged-in', authtoken => this.authToken = authtoken);
     }
 }
-
-/* eslint-disable */
 
 export const authenticate = {
     methods: {
@@ -42,11 +37,12 @@ export const authenticate = {
             return this.$http.post(url,{
                 username, password
             }).then(({data}) => loginUser({
-                username: data.username,
+                user: {username, password},
                 authToken: data._kmd.authtoken 
             }));
         },
         logout(){
+            console.log(JSON.stringify(localStorage.getItem('authToken')));
             return fetch(`https://baas.kinvey.com/user/${config.appKey}/_logout`,{
             method: 'POST',
             headers: {
@@ -54,7 +50,9 @@ export const authenticate = {
                 'Content-Type': 'application/json'
             },
             data: null
-            }).then(res => clearToken())
+            }).then(res => {console.log(res)})
         }
+        
     },
+
 }

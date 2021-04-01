@@ -1,21 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import {store} from './store'
 import Vuelidate from 'vuelidate'
-import axiosPlugin from '@/plugins/axiosPlugin' 
-import { authService } from './services/authService'
-import {carService} from './services/carServices'
+import { carService } from './services/carServices'
 import vuetify from '@/vuetify'
-Vue.use(axiosPlugin);
+import  router from './router.js'
+
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuelidate);
-Vue.use(axiosPlugin);
-Vue.mixin(authService);
 Vue.mixin(carService);
 
 
