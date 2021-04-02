@@ -41,7 +41,7 @@ export default {
         let carId = this.$route.params.id
         carService.getOneCar(carId).then((response) => {
           this.car = response.data
-        }).catch( () => {
+        }).catch(() => {
             router.push('/NotFound')
             router.go();
         });

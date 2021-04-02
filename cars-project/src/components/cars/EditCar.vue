@@ -44,6 +44,7 @@ import router from '../../router.js'
 export default {
     data() {
         return {
+          carId: "",
           carBrand: "",
           carModel: "",
           price : "",
@@ -56,20 +57,49 @@ export default {
     },
     methods: {
          generateCarProperties(){
-            let carId = this.$route.params.id
-
-             carService.getOneCar(carId).then((response) => {
+            let paramId = this.$route.params.id
+            this.carId = paramId;
+             carService.getOneCar(paramId).then((response) => {
                 let carData = response.data
 
                 this.carBrand = carData.carBrand;
                 this.carModel = carData.carModel;
                 this.price = carData.price;
                 this.carImage = carData.carImage;
+                console.log(carData.carImage);
                 this.description = carData.description; 
             }).catch((error) => {
               router.push('/NotFound')
               router.go();
             })
+        },
+        onEditCar() {
+          const {
+            carId,
+            carBrand,
+            carModel,
+            price,
+            carImage,
+            description,
+          } = this;
+
+          console.log(carId);
+          this.$v.$touch();
+          if(this.$v.$invalid){
+            console.log('invalid');
+            return;
+          }
+
+          carService.updateCar(carId, carBrand, carModel, price, carImage, description)
+          .then(() => {
+            console.log('successful edit');
+
+            router.push({name: 'carDetails', params: {id: carId}});
+            router.go();
+          }).catch((error) => {
+            console.log(error)
+            return;
+          });
         }
     },
     validations: {
