@@ -6,27 +6,27 @@
     <!-- Name -->
     <div class="row">
         <div class="col">
-         <input type="text" id="defaultContactFormName" required v-model="$v.carBrand.$model" class="form-control mb-4 col-sm-12" :placeholder="this.car.carBrand">
+         <input type="text" id="defaultContactFormName" required v-model="$v.carBrand.$model" class="form-control mb-4 col-sm-12" :placeholder="this.carBrand">
         </div>
         <div class="col">
-         <input type="text" id="defaultContactFormName" required v-model="$v.carModel.$model" class="form-control mb-4 col-sm-12" :placeholder="this.car.carModel">
+         <input type="text" id="defaultContactFormName" required v-model="$v.carModel.$model" class="form-control mb-4 col-sm-12" :placeholder="this.carModel">
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <input type="currency" id="defaultContactFormEmail" required v-model="$v.price.$model" class="form-control mb-4 col-sm-12" :placeholder="this.car.price">
+            <input type="currency" id="defaultContactFormEmail" required v-model="$v.price.$model" class="form-control mb-4 col-sm-12" :placeholder="this.price">
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <input type="imageURl" id="defaultContactFormEmail" required v-model="$v.carImage.$model" class="form-control mb-4 col-sm-12" :placeholder="this.car.carImage">
+            <input type="imageURl" id="defaultContactFormEmail" required v-model="$v.carImage.$model" class="form-control mb-4 col-sm-12" :placeholder="this.carImage">
         </div>
     </div>
 
     <!-- Message -->
     <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" required v-model="$v.description.$model" rows="6" :placeholder="this.car.description"></textarea>
+        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" required v-model="$v.description.$model" rows="6" :placeholder="this.description"></textarea>
     </div>
 
     <!-- Send button -->
@@ -38,26 +38,38 @@
 <script>
 /* eslint-disable */
 import {required, minLength, maxLength, email} from 'vuelidate/lib/validators'
-import { mapGetters } from 'vuex';
+import {carService} from '../../services/carServices.js'
+import router from '../../router.js'
+
 export default {
     data() {
         return {
-        carBrand: "",
-        carModel: "",
-        price : "",
-        carImage: "",
-        description: ""
+          carBrand: "",
+          carModel: "",
+          price : "",
+          carImage: "",
+          description: "",
         }
     },
-    computed: {
-      ...mapGetters(['getOneCar']),
-      car() {
-        return this.getOneCar(this.$route.params.id)
-      }
+    created() {
+      this.generateCarProperties()
     },
     methods: {
-        onEditCar(){
-            console.log('edited')
+         generateCarProperties(){
+            let carId = this.$route.params.id
+
+             carService.getOneCar(carId).then((response) => {
+                let carData = response.data
+
+                this.carBrand = carData.carBrand;
+                this.carModel = carData.carModel;
+                this.price = carData.price;
+                this.carImage = carData.carImage;
+                this.description = carData.description; 
+            }).catch((error) => {
+              router.push('/NotFound')
+              router.go();
+            })
         }
     },
     validations: {

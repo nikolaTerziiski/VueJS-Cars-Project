@@ -5,7 +5,7 @@ import { userService } from './services/userService.js';
 /* eslint-disable */ 
 const cookies = JSON.parse(localStorage.getItem('authToken'));
 
-const userState = cookies ? {status: {isItLoggedIn : true}, username: cookies.username} : { status : {}, user: null};
+const userState = cookies ? {status: {isItLoggedIn : true}, username: cookies.username} : { status : {}, username: null};
 
 export const userAuth = {
     namespaced: true,
@@ -15,8 +15,13 @@ export const userAuth = {
             return state.status.isItLoggedIn;
         },
         user: (state) => {
-            return state.user;
+            return state.username;
         },
+        getAuthToken: (state) => {
+            let authToken = localStorage.getItem('authToken');
+            authToken = authToken.substring(1, authToken.length - 1);
+            return authToken;
+        }
     },
     actions: {
         login({dispatch, commit}, {username, password}) {

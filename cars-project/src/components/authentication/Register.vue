@@ -33,10 +33,6 @@ export default {
     },
   methods: { 
       onRegisterClick() {
-        // this.onRegisterUser(this.username, this.password)
-        //       .then(res => {
-        //         this.$router.push('/')})
-
         const {username, password, email} = this;
         const { dispatch } = this.$store
         this.$v.$touch();

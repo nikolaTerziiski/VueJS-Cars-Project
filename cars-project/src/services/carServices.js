@@ -1,30 +1,25 @@
-/* eslint-disable */
+import {HTTP} from '../helper/httpHelper.js'
+
 import config from '@/config/config'
 const authString= btoa(`${config.appKey}:${config.appSecret}`)
+import { store } from '../store.js'
 
-const setCars = cars => {
 
-    return cars;
-}
 
 export const carService = {
-    data() {
-        return {
-                authToken: localStorage.getItem('authtoken')
-        }
-    },
-    methods: {
         createCar(carBrand, carModel, price, carImage, description){
-
-            this.$http.defaults.headers.post['Authorization'] = `Kinvey ${this.authToken}`
-
-             return this.$http.post(`https://baas.kinvey.com/appdata/${config.appKey}/cars`, {
+            HTTP.defaults.headers.post['Authorization'] = `Kinvey ${store.getters['userAuth/getAuthToken']}`
+            console.log('inside service')
+             return HTTP.post(`https://baas.kinvey.com/appdata/${config.appKey}/cars`, {
                 carBrand, carModel, price, carImage, description
             })
         },
         getAllCars(){
-            this.$http.defaults.headers.get['Authorization'] = `Kinvey ${this.authToken}`
-             return this.$http.get(`https://baas.kinvey.com/appdata/${config.appKey}/cars`)
+            HTTP.defaults.headers.get['Authorization'] = `Kinvey ${store.getters['userAuth/getAuthToken']}`
+            return HTTP.get(`https://baas.kinvey.com/appdata/${config.appKey}/cars`);
         },
-    },
+        getOneCar(carId) {
+            HTTP.defaults.headers.get['Authorization'] = `Kinvey ${store.getters['userAuth/getAuthToken']}`
+            return HTTP.get(`https://baas.kinvey.com/appdata/${config.appKey}/cars/${carId}`)
+        }
 }

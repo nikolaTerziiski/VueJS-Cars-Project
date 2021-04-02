@@ -37,27 +37,38 @@
 </template>
 <script>
 /* eslint-disable */
-import { carService } from '../../services/carServices';
-import { authenticate } from '../../services/authService';
 
 import {required, minLength, maxLength, email} from 'vuelidate/lib/validators'
+import router from '../../router.js'
+import {carService} from '../../services/carServices.js'
+
 export default {
     data() {
         return {
-        carBrand: "",
-        carModel: "",
-        price : "",
-        carImage: "",
-        description: ""
+            carBrand: "",
+            carModel: "",
+            price : "",
+            carImage: "",
+            description: "",
         }
     },
     methods:{
         onCreateCar() {
-            this.createCar(this.carBrand, this.carModel, this.price, this.carImage, this.description)
-            .then(res => this.$router.push('/'))
+            const {carBrand, carModel, price, carImage, description} = this
+            const {dispatch} = this.$store
+            
+            this.$v.$touch();
+            if(this.$v.$invalid){
+                dispatch(
+                    'alert/wrongCredentials', 'The credentials about the car are invalid'
+                )
+            }
+            carService.createCar(carBrand, carModel, price, carImage, description)
+            .then((res) => {console.log(res)});
+
+            router.push('/');
         }
     },
-    mixins: [carService, authenticate],
     validations: {
         carBrand: {
             required,

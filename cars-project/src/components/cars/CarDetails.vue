@@ -1,6 +1,4 @@
 <template>
-<div class="container">
-
   <div class="row">
     <div class="col-md-8">
       <img class="img-fluid" :src="this.car.carImage" alt="">
@@ -22,20 +20,31 @@
 
   </div>
   <!-- /.row -->
-  
-
-</div>
 <!-- /.container -->
 </template>
 
 <script>
-/* eslint-disable */ 
-import { mapGetters } from 'vuex';
+import {carService} from '../../services/carServices.js'
+import router from '../../router.js'
+
 export default {
-    computed: {
-      ...mapGetters(['getOneCar']),
-      car() {
-        return this.getOneCar(this.$route.params.id)
+    data() {
+        return {
+          car: {},
+        }
+    },
+    created() {
+      this.generateData();
+    },
+    methods: {
+      generateData() {
+        let carId = this.$route.params.id
+        carService.getOneCar(carId).then((response) => {
+          this.car = response.data
+        }).catch( () => {
+            router.push('/NotFound')
+            router.go();
+        });
       }
     },
 }

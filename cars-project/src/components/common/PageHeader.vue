@@ -15,6 +15,7 @@
       <v-spacer></v-spacer>
       <span>
           <a href="/cars/create">Create Car</a>
+          <a href="/cars/all">All Cars</a>
           <a href="#">Welcome</a>
           <a href="/logout">Logout</a>
 
