@@ -5,7 +5,7 @@ import { userService } from './services/userService.js';
 /* eslint-disable */ 
 const cookies = JSON.parse(localStorage.getItem('authToken'));
 
-const userState = cookies ? {status: {isItLoggedIn : true}, username: cookies.username} : { status : {}, username: null};
+const userState = cookies ? {status: {isItLoggedIn : true}, user: JSON.parse(localStorage.getItem('user'))} : { status : {}, user:null  };
 
 export const userAuth = {
     namespaced: true,
@@ -14,8 +14,11 @@ export const userAuth = {
         isItLoggedIn: (state) => {
             return state.status.isItLoggedIn;
         },
-        user: (state) => {
-            return state.username;
+        username: (state) => {
+            return userState.user.username;
+        },
+        getUserInfo: (state) => {
+            return userState.user
         },
         getAuthToken: (state) => {
             let authToken = localStorage.getItem('authToken');
@@ -25,21 +28,18 @@ export const userAuth = {
     },
     actions: {
         login({dispatch, commit}, {username, password}) {
-            userService.login(username, password).then( (user) => {
-                localStorage.setItem('authToken', JSON.stringify(user.data._kmd.authtoken ));
-                localStorage.setItem('username', user.data.username)
+            userService.login(username, password).then((response) => {
+                
+                //Setting the tokens
+                localStorage.setItem('authToken', JSON.stringify(response.data._kmd.authtoken ));
+                localStorage.setItem('user', JSON.stringify(response.data))
 
                 router.push('/');
                 router.go();
             }, (error) => {console.log(error)});
         },
         register({dispatch, comit}, {username, password, email}){
-            console.log('inside register')
-
             userService.register(username, password, email).then((user) => {
-
-                console.log(user)
-                console.log(user.data._kmd.authtoken)
                 
                 localStorage.setItem('authToken', JSON.stringify(user.data._kmd.authtoken ));
                 localStorage.setItem('username', user.data.username)
@@ -49,7 +49,7 @@ export const userAuth = {
             }, (error) => {console.log(error);})
         },
         logout({commit}) {
-            localStorage.removeItem('authToken')
+            userService.logout();
             router.push('/');
             router.go();
         }

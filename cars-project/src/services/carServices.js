@@ -26,5 +26,11 @@ export const carService = {
             return HTTP.put(`https://baas.kinvey.com/appdata/${config.appKey}/cars/${carId}`, {
                  carBrand, carModel, price, carId, carImage, description
             })
-        }
+        },
+        getCarCountForUser(){
+            HTTP.defaults.headers.get['Authorization'] = `Kinvey ${store.getters['userAuth/getAuthToken']}`;
+            let creator = store.getters['userAuth/getUserInfo'];
+
+            return HTTP.get(`https://baas.kinvey.com/appdata/${config.appKey}/cars/?query={"_acl.creator":"${creator._id}"}`)
+        }   
 }

@@ -8,17 +8,17 @@
     >
       <v-toolbar-title>
         <span>
-        <a href="/">Car place</a>
+        <a href="/">Home</a>
         </span>
+        <a style="pointer-events: none"> <span style="color: blue">Welcome {{getUsername}}</span> </a>
         </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <span>
           <a href="/cars/create">Create Car</a>
           <a href="/cars/all">All Cars</a>
-          <a href="#">Welcome</a>
           <a href="/logout">Logout</a>
-
+          <a href="/profile">Profile</a>
         </span>
     </v-app-bar>
     <v-app-bar v-else
@@ -48,6 +48,9 @@ export default {
     computed: {
         isLoggedIn() {
             return store.getters['userAuth/isItLoggedIn']
+        },
+        getUsername() {
+          return store.getters['userAuth/username']
         }
     },
     mixins: [ authenticate ],

@@ -10,6 +10,7 @@ import NotFound from '../src/components/common/NotFound.vue'
 import EditCar from '../src/components/cars/EditCar.vue'
 import Logout from '../src/components/authentication/Logout.vue'
 import VueRouter from 'vue-router'
+import Profile from '../src/components/user/Profile.vue'
 import { store } from './store.js';
 
 
@@ -37,6 +38,11 @@ const routes = [
     component: Logout
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
     path: '/cars/create',
     name: 'createCar',
     component: CreateCar
@@ -60,7 +66,8 @@ const routes = [
     path: '*',
     name: 'NotFound',
     component: NotFound
-  }
+  },
+
 ]
 const router = new VueRouter({
   mode: 'history',

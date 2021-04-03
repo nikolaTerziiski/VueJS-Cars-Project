@@ -60,13 +60,13 @@ export default {
             let paramId = this.$route.params.id
             this.carId = paramId;
              carService.getOneCar(paramId).then((response) => {
+               
                 let carData = response.data
 
                 this.carBrand = carData.carBrand;
                 this.carModel = carData.carModel;
                 this.price = carData.price;
                 this.carImage = carData.carImage;
-                console.log(carData.carImage);
                 this.description = carData.description; 
             }).catch((error) => {
               router.push('/NotFound')

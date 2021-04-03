@@ -9,7 +9,7 @@ export const userService = {
             HTTP.defaults.headers.post['Authorization'] = `Basic ${authString}`
             let response = HTTP.post(`/user/${config.appKey}/login`, {username, password})
             localStorage.setItem('authToken', JSON.stringify(response));
-            return response
+            return response;
     },
     register(username, password, email){
             HTTP.defaults.headers.post['Authorization'] = `Basic ${authString}`
@@ -17,11 +17,8 @@ export const userService = {
             return response;
     },
     logout(){
-        localStorage.removeItem('authToken')
-        console.log('username');
-        localStorage.removeItem('username')
-        console.log('username');
-
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
     }
 
 }
