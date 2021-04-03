@@ -11,6 +11,7 @@
         <a href="/">Home</a>
         </span>
         <a style="pointer-events: none"> <span style="color: blue">Welcome {{getUsername}}</span> </a>
+        <a href="/news/all">News</a>
         </v-toolbar-title>
 
       <v-spacer></v-spacer>

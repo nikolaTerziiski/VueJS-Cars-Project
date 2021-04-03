@@ -55,9 +55,11 @@ export default {
       generateUser(){
           this.user = store.getters['userAuth/getUserInfo']
 
-          carService.getCarCountForUser().then((response) => {
-             this.user.carsCount = response.data.length;
+         carService.getCarCountForUser().then((response) => {
+              this.user.carsCount = response.data.length;
           });
+
+          // console.log(this.user.carsCount);
       }
     }
 }
