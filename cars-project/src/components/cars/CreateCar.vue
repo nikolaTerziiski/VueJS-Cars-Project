@@ -57,9 +57,9 @@ export default {
             const {carBrand, carModel, price, carImage, description} = this
             const {dispatch} = this.$store
             
-            this.$v.$touch();
             if(this.$v.$invalid){
-                console.log('errors');
+                router.push('/cars/create');
+                router.go();
             }
             carService.createCar(carBrand, carModel, price, carImage, description)
             .then((res) => {console.log(res)});
@@ -67,6 +67,7 @@ export default {
             router.push('/');
         }
     },
+    mixins: [carService],
     validations: {
         carBrand: {
             required,
@@ -81,7 +82,7 @@ export default {
         price: {
           required,
           minLength: minLength(2),
-            maxLength: maxLength(20)
+          maxLength: maxLength(20)
         },
         carImage: {
             required

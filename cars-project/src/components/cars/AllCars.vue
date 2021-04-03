@@ -27,7 +27,8 @@ export default {
         this.cars = response.data;
       });
     } 
-  }
+  },
+  mixins: [carService]
 }
 </script>
 

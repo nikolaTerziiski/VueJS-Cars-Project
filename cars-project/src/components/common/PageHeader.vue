@@ -7,10 +7,10 @@
       dark
     >
       <v-toolbar-title>
+        <a style="pointer-events: none"> <span style="color: blue">Welcome {{getUsername}}</span> </a>
         <span>
         <a href="/">Home</a>
         </span>
-        <a style="pointer-events: none"> <span style="color: blue">Welcome {{getUsername}}</span> </a>
         <a href="/news/all">News</a>
         </v-toolbar-title>
 

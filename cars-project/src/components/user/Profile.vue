@@ -59,7 +59,7 @@ export default {
               this.user.carsCount = response.data.length;
           });
 
-          // console.log(this.user.carsCount);
+          console.log(this.user.carsCount);
       }
     }
 }

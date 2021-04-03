@@ -15,9 +15,12 @@
         <li>{{this.car.carModel}}</li>
         <li>{{this.car.price}}.00 EUR</li>
       </ul>
+      <div v-if=this.car.isUserCurrent>
         <button class="btn btn-warning my-4" type="submit"><router-link :to="{name: 'editCar', params: {id: this.car._id}}">Edit car</router-link></button>
     </div>
-
+    <div v-else>
+    </div>
+    </div>
   </div>
   <!-- /.row -->
 <!-- /.container -->
@@ -41,14 +44,15 @@ export default {
         let carId = this.$route.params.id
         carService.getOneCar(carId).then((response) => {
           this.car = response.data
+          let userInfo = store.getters['userAuth/getUserInfo']
+          
+          userInfo._id == response.data._acl.creator ? this.car.isUserCurrent = true : this.car.isUserCurrent = false;
+          
+
         }).catch(() => {
             router.push('/NotFound')
             router.go();
         });
-
-        this.car.isUserLoggedIn = store.getters['userAuth/isItLoggedIn']
-        console.log(store.getters['userAuth/isItLoggedIn'])
-        console.log(this.car.isUserLoggedIn);
       }
     },
 }

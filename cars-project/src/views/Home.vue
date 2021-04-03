@@ -8,9 +8,12 @@
                   <div v-if="isLoggedIn" class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
                     <h1 class="h1-responsive font-weight-bold mt-sm-5">Welcome to my app! </h1>
                     <hr class="hr-light">
-                    <h6 class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt
-                    dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae
-                    iste.</h6>
+                    <button type="button" class="btn btn-primary"><router-link style="color:white" to="/news/all">
+                    Check our news
+                  </router-link></button>
+                    <button type="button" class="btn btn-secondary" style="margin-left:50px"><router-link style="color: white" to="/cars/all">
+                    Check our cars
+                  </router-link></button>  
                   </div>
                   <div v-else class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
                     <h1 class="h1-responsive font-weight-bold mt-sm-5">Welcome to my app! </h1>
